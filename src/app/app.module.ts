@@ -11,12 +11,12 @@ import { ChatPage } from '../pages/chat/chat';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 var config = {
-  apiKey: "AIzaSyCE30U69PzmAgsu9_vlCtqYQ5CFN8O0prk",
-  authDomain: "ionic-chat-starter.firebaseapp.com",
-  databaseURL: "https://ionic-chat-starter.firebaseio.com",
-  projectId: "ionic-chat-starter",
-  storageBucket: "ionic-chat-starter.appspot.com",
-  messagingSenderId: "950873202952"
+  apiKey: "AIzaSyAiPOKeoWlagOg5tr8bvxEixYxMIMQagzY",
+  authDomain: "ionic-firebase-chat-e1c36.firebaseapp.com",
+  databaseURL: "https://ionic-firebase-chat-e1c36.firebaseio.com",
+  projectId: "ionic-firebase-chat-e1c36",
+  storageBucket: "ionic-firebase-chat-e1c36.appspot.com",
+  messagingSenderId: "61897110598"
 };
 
 @NgModule({

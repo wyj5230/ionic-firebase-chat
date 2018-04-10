@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 /**
 * Generated class for the ChatPage page.
@@ -20,10 +20,10 @@ export class ChatPage {
   _chatSubscription;
   messages: object[] = [];
 
-  constructor(public db: AngularFireDatabase,
+  constructor(public db: AngularFireDatabase, private alertCtrl: AlertController,
     public navCtrl: NavController, public navParams: NavParams) {
       this.username = this.navParams.get('username');
-      this._chatSubscription = this.db.list('/chat').subscribe( data => {
+      this._chatSubscription = this.db.list('/chat').valueChanges().subscribe( data => {
         this.messages = data;
       });
     }
@@ -33,10 +33,8 @@ export class ChatPage {
         username: this.username,
         message: this.message
       }).then( () => {
-        // message is sent
-      }).catch( () => {
-        // some error. maybe firebase is unreachable
-      });
+        this.showAlert("Good Job!", "Alert is sent.");
+      })
       this.message = '';
     }
 
@@ -53,5 +51,14 @@ export class ChatPage {
         specialMessage: true,
         message: `${this.username} has left the room`
       });
+    }
+
+    showAlert(title: string, message: string) {
+      let alertBox = this.alertCtrl.create({
+        title: title,
+        subTitle: message,
+        buttons: ['OK']
+      });
+      alertBox.present();
     }
   }
