@@ -33,7 +33,6 @@ export class ChatPage {
         username: this.username,
         message: this.message
       }).then( () => {
-        this.showAlert("Good Job!", "Alert is sent.");
       })
       this.message = '';
     }
@@ -41,7 +40,7 @@ export class ChatPage {
     ionViewDidLoad() {
       this.db.list('/chat').push({
         specialMessage: true,
-        message: `${this.username} has joined the room`
+        message: `${this.username} is online now!`
       });
     }
 
@@ -49,7 +48,7 @@ export class ChatPage {
       this._chatSubscription.unsubscribe();
       this.db.list('/chat').push({
         specialMessage: true,
-        message: `${this.username} has left the room`
+        message: `${this.username} just went offline.`
       });
     }
 
