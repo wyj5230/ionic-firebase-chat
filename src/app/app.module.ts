@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ChatPage } from '../pages/chat/chat';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
@@ -30,7 +31,8 @@ var config = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
