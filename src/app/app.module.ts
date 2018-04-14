@@ -10,6 +10,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ChatPage } from '../pages/chat/chat';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { Camera } from '@ionic-native/camera';
+import { UploadsProvider } from '../providers/uploads/uploads';
 
 var config = {
   apiKey: "AIzaSyAiPOKeoWlagOg5tr8bvxEixYxMIMQagzY",
@@ -32,7 +35,8 @@ var config = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +47,9 @@ var config = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Camera,
+    UploadsProvider
   ]
 })
 export class AppModule {}
