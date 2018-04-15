@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { UploadsProvider } from '../../providers/uploads/uploads';
 
 /**
@@ -70,8 +69,6 @@ export class ChatPage {
 
     const options: CameraOptions = {
       quality: 50,
-      targetHeight: 600,
-      targetWidth: 600,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -81,17 +78,16 @@ export class ChatPage {
     }
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.phtoData = base64Image;
       this.uploadService.uploadToStorage(base64Image, new Date().getTime() + ".jpeg").then(res => {
         console.log('res download url:', res.downloadURL);
         this.photUrl = res.downloadURL;
         this.message = res.downloadURL;
         this.sendMessage();
       }).catch(function () {
-        console.log('Failed to save photo to cloud.');
+        console.log('Failed to save photo to cloud, please check your internet connection and try again.');
       });
     }).catch(function () {
-      console.log('Failed to invoke native camera.');
+      console.log('Failed to invoke native camera, please restart your app and try again.');
     });
   }
 }
