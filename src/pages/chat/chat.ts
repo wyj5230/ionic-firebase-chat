@@ -23,6 +23,7 @@ export class ChatPage {
   _chatSubscription;
   messages: object[] = [];
   photUrl: string = '';
+  phtoData:any;
 
   constructor(public db: AngularFireDatabase, private alertCtrl: AlertController,
     public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private uploadService: UploadsProvider) {
@@ -80,11 +81,11 @@ export class ChatPage {
     }
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log('tack photo :', base64Image);
+      this.phtoData = base64Image;
       this.uploadService.uploadToStorage(base64Image, new Date().getTime() + ".jpeg").then(res => {
         console.log('res download url:', res.downloadURL);
-        //this.photUrl = res.downloadURL;
-        this.message = res.metadata.fullPath;
+        this.photUrl = res.downloadURL;
+        this.message = res.downloadURL;
         this.sendMessage();
       }).catch(function () {
         console.log('Failed to save photo to cloud.');
