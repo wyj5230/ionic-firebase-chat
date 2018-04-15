@@ -22,7 +22,7 @@ export class ChatPage {
   _chatSubscription;
   messages: object[] = [];
   photUrl: string = '';
-  phtoData:any;
+  phtoData: any;
 
   constructor(public db: AngularFireDatabase, private alertCtrl: AlertController,
     public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private uploadService: UploadsProvider) {
@@ -65,18 +65,28 @@ export class ChatPage {
     alertBox.present();
   }
 
-  takePhoto() {
+  takePhoto(fromCamera: boolean) {
 
-    const options: CameraOptions = {
-      quality: 50,
+    const optionCamera: CameraOptions = {
+      quality: 80,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.CAMERA,
       correctOrientation: true,
-      saveToPhotoAlbum: true
+      saveToPhotoAlbum: true,
+      allowEdit: true
     }
-    this.camera.getPicture(options).then((imageData) => {
+    const optionLibrary: CameraOptions = {
+      quality: 80,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation: true,
+      allowEdit: true
+    }
+    this.camera.getPicture(fromCamera ? optionCamera : optionLibrary).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.uploadService.uploadToStorage(base64Image, new Date().getTime() + ".jpeg").then(res => {
         console.log('res download url:', res.downloadURL);

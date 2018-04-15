@@ -31,7 +31,8 @@ Ionic pages and navigation.
   <ion-toolbar>
     <div id="footer">
       <div class="elem"><ion-input type="text" [(ngModel)]="message"></ion-input></div>
-      <div class="elem"><button ion-button icon-only (click)="takePhoto()"><ion-icon name="camera"></ion-icon> </button></div>
+      <div class="elem"><button ion-button icon-only (click)="takePhoto(true)"><ion-icon name="camera"></ion-icon> </button></div>
+      <div class="elem"><button ion-button icon-only (click)="takePhoto(false)"><ion-icon name="image"></ion-icon> </button></div>
       <div class="elem"><button ion-button icon-only (click)="sendMessage()"><ion-icon name="send"></ion-icon> </button></div>
     </div>
   </ion-toolbar>
