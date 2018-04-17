@@ -19,11 +19,11 @@ Ionic pages and navigation.
     <div *ngFor="let message of messages" [class]="message.specialMessage ? 'message special' : 'message'">
       <div [class]="message.username == username ? 'innerMessage messageRight' : 'innerMessage messageLeft'">
         <div class="username">{{ message.username }}</div>
-        <div class="messageContent">{{ message.message }}</div>
+        <div *ngIf="!message.isImage" class="messageContent">{{ message.message }}</div>
+        <div *ngIf="message.isImage"><p><img height="42" width="42" src="{{ message.message }}"/></p></div>
       </div>
     </div>
   </div>
-  <p><img src="{{ photUrl }}"/></p>
 
 </ion-content>
 

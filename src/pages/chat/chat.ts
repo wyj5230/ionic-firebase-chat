@@ -41,6 +41,16 @@ export class ChatPage {
     this.message = '';
   }
 
+  sendImage() {
+    this.db.list('/chat').push({
+      username: this.username,
+      message: this.message,
+      isImage: true
+    }).then(() => {
+    })
+    this.message = '';
+  }
+
   ionViewDidLoad() {
     this.db.list('/chat').push({
       specialMessage: true,
@@ -92,7 +102,7 @@ export class ChatPage {
         console.log('res download url:', res.downloadURL);
         this.photUrl = res.downloadURL;
         this.message = res.downloadURL;
-        this.sendMessage();
+        this.sendImage();
       }).catch(function () {
         console.log('Failed to save photo to cloud, please check your internet connection and try again.');
       });
